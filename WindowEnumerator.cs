@@ -56,7 +56,7 @@ namespace TXMeetingRing
         /// <summary>
         /// 默认的查找窗口的过滤条件。可见 + 非最小化 + 包含窗口标题。
         /// </summary>
-        private static readonly Predicate<WindowInfo> DefaultPredicate = x => x.Title.Length > 0 && x.Title.StartsWith("成员");
+        private static readonly Predicate<WindowInfo> DefaultPredicate = x => x.Title.Length > 0 && x.Title.Contains("成员(");
 
         private delegate bool WndEnumProc(IntPtr hWnd, int lParam);
 

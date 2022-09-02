@@ -12,32 +12,36 @@ namespace TXMeetingRing
         static void Main(string[] args)
         {
             {
-                String title="";
                 bool firstrun = true;
+                int people = 0;
                 Console.WriteLine("@th7");
                 while (true)
                 {
                     var windows = WindowEnumerator.FindAll();
+                    DateTime dt = DateTime.Now;
                     if (windows.Count == 1)
                     {
-
                         var window = windows[0];
+                        int peoplenow = Convert.ToInt32(System.Text.RegularExpressions.Regex.Replace(window.Title, @"[^0-9]+", ""));
                         if (firstrun)
                         {
-                            title = window.Title;
+                            people = peoplenow;
+                            Console.WriteLine(dt.ToString() + " 当前会议室人数: " + peoplenow);
                             firstrun = false;
                         }
                         else
                         {
-                            if (title != window.Title)
+                            if (people != peoplenow)
                             {
-                                System.Media.SystemSounds.Asterisk.Play();
+                                Console.WriteLine(dt.ToString()+" 当前会议室人数: "+peoplenow);
+                                if (people < peoplenow)
+                                {
+                                    System.Media.SystemSounds.Asterisk.Play();
+                                }
                             }
-                            title = window.Title;
+                            people = peoplenow;
                         }
-                        Console.WriteLine($@"{window.Title}");
-
-
+                        
                     }
                     else
                     {
